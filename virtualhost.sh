@@ -158,7 +158,7 @@ OPEN_COMMAND="/usr/bin/open"
 # If you want to use a different browser than Safari, define it here:
 #BROWSER="Firefox"
 #BROWSER="WebKit"
-#BROWSER="Google Chrome"
+BROWSER="Google Chrome"
 
 # If defined, a ServerAlias os $1.$WILDCARD_ZONE will be added to the virtual
 # host file. This is useful if you, for example, have setup a wildcard domain
@@ -561,7 +561,7 @@ __EOT
 	fi
 fi
 
-if ! grep -q -E "^NameVirtualHost \*:$APACHE_PORT" $APACHE_CONFIG/httpd.conf ; then
+if ! grep -q -E "^NameVirtualHost \*:$APACHE_PORT" $APACHE_CONFIG/httpd.conf && ! grep -q -E "^NameVirtualHost \*:$APACHE_PORT" $APACHE_CONFIG/extra/httpd-vhosts.conf ; then
 
 	/bin/echo "httpd.conf not ready for virtual hosting. Fixing..."
 	cp $APACHE_CONFIG/httpd.conf $APACHE_CONFIG/httpd.conf.original
